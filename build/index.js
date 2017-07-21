@@ -12,7 +12,7 @@ let css = `.emoji {
   display: inline-block;
   contenteditable: false;
   background-size: 4900%;
-  background-image: url('/static/emoji/emojis.pngasda');
+  background-image: url('${src}');
   background-repeat: no-repeat;
   margin: 0px 2px;
   padding-bottom: -5px;

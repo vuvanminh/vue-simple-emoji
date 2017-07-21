@@ -1,4 +1,3 @@
-// require('css-loader!vue-simple-emoji/src/emoji.css');
 var unicodeMap = require('./map');
 var unicodeReg = /([\u00a9-\u3299]\ufe0f)|([\u0023-\u0039]\u20e3)|(\ud83c[\udd70-\udff0])|(\ud83d[\udc00-\udec0])|[\ue001-\ue537]/gi
 function replaceFunc (s, path) {

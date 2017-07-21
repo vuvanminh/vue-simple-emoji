@@ -4,7 +4,7 @@
   display: inline-block;
   contenteditable: false;
   background-size: 4900%;
-  background-image: url('/static/emoji/emojis.png');
+  background-image: url('https://unpkg.com/emoji-datasource-apple@3.0.0/img/apple/sheets/64.png');
   background-repeat: no-repeat;
   margin: 0px 2px;
   padding-bottom: -5px;
