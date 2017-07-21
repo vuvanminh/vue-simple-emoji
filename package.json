@@ -1,0 +1,30 @@
+{
+  "name": "vue-simple-emoji",
+  "version": "0.9.0",
+  "description": "Emoji from unicode",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arswarog/vue-simple-emoji.git"
+  },
+  "keywords": [
+    "Vue",
+    "Emoji",
+    "Emotions"
+  ],
+  "author": "arswarog@yandex.ru",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arswarog/vue-simple-emoji/issues"
+  },
+  "homepage": "https://github.com/arswarog/vue-simple-emoji#readme",
+  "devDependencies": {
+    "request": "^2.4.0",
+    "vue": "^2.0",
+    "webpack": "^1.13.1"
+  }
+}
