@@ -6,7 +6,9 @@ let size = 16;
 
 let categories = {};
 
-let css = `.emoji {
+let css = fs.readFileSync('./src/container.css','utf8');
+
+css += `.emoji {
   width: ${size}px;
   height: ${size}px;
   display: inline-block;
@@ -50,7 +52,7 @@ request.get('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji_pr
     css += `.emoji.emoji-${item.unified} { background-position: ${pos}; }\n`;
   }
 
-  var path = process.cwd() + "/src/emoji.css";
+  var path = process.cwd() + "/build/emoji.css";
   console.log(path);
   fs.writeFile(path, css, function (err) {
     if (err) {
