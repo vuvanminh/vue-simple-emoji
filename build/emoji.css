@@ -64,18 +64,26 @@
 }
 
 .emoji {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   display: inline-block;
   contenteditable: false;
   background-size: 4900%;
   background-image: url('https://unpkg.com/emoji-datasource-apple@3.0.0/img/apple/sheets/64.png');
   background-repeat: no-repeat;
-  margin: 0px 2px;
+  margin: -2px 2px 0 2px;
   padding-bottom: -5px;
-  vertical-align: baseline;
+  vertical-align: middle;
   text-indent: -9999px;
   border: 0;
+}
+.emoji.emoji16 {
+  width: 16px;
+  height: 16px;
+}
+.emoji.emoji24 {
+  width: 24px;
+  height: 24px;
 }
 .emoji.emoji-copyright { background-position: 0% 0%; }
 .emoji.emoji-00A9 { background-position: 0% 0%; }
