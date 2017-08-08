@@ -1,6 +1,6 @@
 {
   "name": "vue-simple-emoji",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "Emoji from unicode",
   "main": "src/index.js",
   "scripts": {

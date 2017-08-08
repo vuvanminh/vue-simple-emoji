@@ -44,8 +44,8 @@ request.get('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji_pr
     let pos = `${x}% ${y}%`;
 
     categories[item.category] = categories[item.category] ? categories[item.category] + 1 : 1;
-    css += `.emoji.emoji-${item.short_name} { background-position: ${pos}; }\n`;
-    css += `.emoji.emoji-${item.unified} { background-position: ${pos}; }\n`;
+    css += `.emoji.emoji-${item.short_name.toLowerCase()} { background-position: ${pos}; }\n`;
+    css += `.emoji.emoji-${item.unified.toLowerCase()} { background-position: ${pos}; }\n`;
   }
 
   var path = process.cwd() + "/build/emoji.css";
