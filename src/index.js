@@ -1,8 +1,109 @@
-var unicodeMap = require('./map');
-var unicodeReg = /([\u00a9-\u3299]\ufe0f)|([\u0023-\u0039]\u20e3)|(\ud83c[\udd70-\udff0])|(\ud83d[\udc00-\udec0])|[\ue001-\ue537]/gi;
+let emoji = require('./Emoji');
+let data = require('../lib/data').default;
+
+class EmojiService {
+  constructor() {
+    this.data = data;
+    console.log(this.data);
+    this.categories = ['Recent'];
+    this.recent = [];
+    this.index = {};
+
+    for (let i in this.data) {
+      this.categories.push(i);
+      this.data[i].forEach(item => {
+        this.index[item.unified] = item;
+      });
+    }
+  }
+
+  getRecent(count) {
+    if (!count) count = 54;
+    console.log('get recent %s', count);
+
+    let recent = localStorage.getItem('recentEmoji');
+    if (recent) {
+      recent = recent.split(',');
+      let data = recent.map(emoji => {
+        for (let name in this.data) {
+          let cat = this.data[name];
+          let res = cat.find(item => item.short === emoji);
+          if (res) return res;
+        }
+      });
+
+      this.recent = data;
+    } else this.recent = [];
+
+    let data = [];
+    for (let i = 0; i < count; i++)
+      if (this.recent[i])
+        data.push(this.recent[i]);
+      else
+        break;
+
+    if (data.length < count)
+      for (let i = 0; data.length < count; i++)
+        if (data.indexOf(this.data.People[i]) === -1)
+          data.push(this.data.People[i]);
+
+    return data;
+  }
+
+  /**
+   * @param  {String} code   Код символа
+   * @param  {String} symbol Сам символ
+   * @return {String}        HTML код картинки
+   */
+  getEmojiBgPos(code, symbol) {
+    let info = this.index[code];
+    if (!info)
+      return false;//console.warn(`Emoji ${code} not exists`);
+
+    let x = Math.round(100000 / 48 * info.x) / 1000;
+    let y = Math.round(100000 / 48 * info.y) / 1000;
+    return `${x}% ${y}%`;
+  }
+
+  saveRecent() {
+    let emojis = this.recent.map(item => item.short);
+    if (emojis.length > 100) emojis.length = 100;
+    localStorage.setItem('recentEmoji', emojis.join(','));
+  }
+
+  addRecentEmoji(emoji) {
+    this.recent.forEach((item, index) => {
+      if (item.short === emoji.short)
+        this.recent.splice(index, 1);
+    });
+    this.recent.unshift(emoji);
+    this.saveRecent();
+  }
+
+  getCategory(name) {
+    if (!name)
+      name = 0;
+
+    if (typeof name === 'number' && this.categories[name])
+      name = this.categories[name];
+
+    if (name === 'Recent')
+      return this.getRecent();
+
+    if (!this.data[name])
+      throw new Error("error emoji category " + name);
+
+    return this.data[name];
+  }
+}
+
 var simpleSmile = {
   container: null,
+  service: new EmojiService(),
+  open: (callback, element, orientation) => window.$simpleSmile.container.open(callback, element, orientation)
 };
+
+window.$simpleSmile = simpleSmile;
 
 function replaceFunc (s, path) {
   var emotionName = '';
