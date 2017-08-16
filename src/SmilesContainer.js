@@ -160,7 +160,6 @@ export default Vue.component('smiles-container', {
     },
   },
   mounted() {
-    console.log(window.$simpleSmile);
     window.$simpleSmile.container = this;
 
     ps.initialize(this.$refs.smilesCollection, {

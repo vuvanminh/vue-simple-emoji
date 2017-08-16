@@ -4,7 +4,6 @@ let data = require('../lib/data').default;
 class EmojiService {
   constructor() {
     this.data = data;
-    console.log(this.data);
     this.categories = ['Recent'];
     this.recent = [];
     this.index = {};
@@ -19,7 +18,6 @@ class EmojiService {
 
   getRecent(count) {
     if (!count) count = 54;
-    console.log('get recent %s', count);
 
     let recent = localStorage.getItem('recentEmoji');
     if (recent) {
