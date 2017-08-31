@@ -33,7 +33,7 @@ export default Vue.component('smiles-container', {
     @mouseout="onWidgetMouseOut()">
 <!--v-on-clickaway="hideSmiles"-->
   <div class="smilesCollection" ref="smilesCollection" @click="smilesContainerElementClick">
-    <emoji v-for="(smile, key) in smiles" class="emoji" :key="key" :emoji="smile.unified" unselectable="on"></emoji>
+    <emoji v-for="(smile, key) in smiles" class="emoji" :key="key" :emoji="smile.utf16" unselectable="on"></emoji>
   </div>
   <div class="collections" @mouseout="onCategoryMouseOut">
     <i aria-hidden="true" unselectable="on" onselectstart="return false;" onmousedown="return false;"
@@ -74,11 +74,13 @@ export default Vue.component('smiles-container', {
       this.$refs.smilesContainer.style.display = 'none';
     },
     smilesContainerElementClick(e) {
+      console.log(e);
       let emoji = e.target.dataset.id;
-      if (emoji && emoji in window.$simpleSmile.service.index) {
-        emoji = window.$simpleSmile.service.index[emoji];
+      console.log(emoji);
+      if (emoji && emoji in window.$simpleSmile.service.utf16) {
+        emoji = window.$simpleSmile.service.utf16[emoji];
         window.$simpleSmile.service.addRecentEmoji(emoji);
-        emoji.bgPos = window.$simpleSmile.service.getEmojiBgPos(emoji.unified);
+        emoji.bgPos = window.$simpleSmile.service.getEmojiBgPos(emoji.utf16);
         this.callback(emoji);
       }
     },

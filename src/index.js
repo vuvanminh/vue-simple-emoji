@@ -7,11 +7,13 @@ class EmojiService {
     this.categories = ['Recent'];
     this.recent = [];
     this.index = {};
+    this.utf16 = {};
 
     for (let i in this.data) {
       this.categories.push(i);
       this.data[i].forEach(item => {
         this.index[item.unified] = item;
+        this.utf16[item.utf16] = item;
       });
     }
   }
@@ -54,7 +56,7 @@ class EmojiService {
    * @return {String}        HTML код картинки
    */
   getEmojiBgPos(code, symbol) {
-    let info = this.index[code];
+    let info = this.utf16[code];
     if (!info)
       return false;//console.warn(`Emoji ${code} not exists`);
 
